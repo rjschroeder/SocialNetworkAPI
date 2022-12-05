@@ -95,14 +95,36 @@ const thoughtController = {
     },
     addReaction(req, res) {
         try {
-            
+            Thought.findOneAndUpdate(
+                {_id:req.params.thoughtId},
+                {$addToSet: {reactions: req.body}},
+                {runValidators: true, new: true}
+            )
+                .then((response) => {
+                    if(!response) {
+                        return res.status(500).json({message: "No thought with this id"})
+                    } else {
+                        res.json(response)
+                    }
+                })
         } catch (err) {
             res.status(500).json(err)
         }
     },
     removeReaction(req, res) {
         try {
-            
+            Thought.findOneAndUpdate(
+                {_id:req.params.thoughtId},
+                {$pull: {reactions: {reactionId: req.params.reactionId}}},
+                {runValidators: true, new: true}
+            )
+                .then((response) => {
+                    if(!response) {
+                        return res.status(500).json({message: "No thought with this id"})
+                    } else {
+                        res.json(response)
+                    }
+                })
         } catch (err) {
             res.status(500).json(err)
         }
