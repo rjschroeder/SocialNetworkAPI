@@ -70,7 +70,25 @@ const thoughtController = {
     },
     deleteThought(req, res) {
         try {
-            
+            Thought.findOneAndRemove({_id:req.params.thoughtId})
+                .then((response) => {
+                    if(!response) {
+                        return res.status(500).json({message: "No thought with this id"})
+                    } else {
+                        return User.findOneAndUpdate(
+                            {thoughts: req.params.thoughtId},
+                            {$pull: {thoughts: req.params.thoguhtId}},
+                            {new:true}
+                        )
+                    }
+                })
+                .then((response) => {
+                    if(!response) {
+                        return res.status(500).json({message: "No user with this id"})
+                    } else {
+                        res.json({message: "Success!"})
+                    }
+                })
         } catch (err) {
             res.status(500).json(err)
         }
