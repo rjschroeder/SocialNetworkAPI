@@ -77,14 +77,14 @@ const thoughtController = {
                     } else {
                         return User.findOneAndUpdate(
                             {thoughts: req.params.thoughtId},
-                            {$pull: {thoughts: req.params.thoguhtId}},
+                            {$pull: {thoughts: req.params.thoughtId}},
                             {new:true}
                         )
                     }
                 })
                 .then((response) => {
                     if(!response) {
-                        return res.status(500).json({message: "No user with this id"})
+                        return res.status(500).json({message: "No thought with this id"})
                     } else {
                         res.json({message: "Success!"})
                     }
@@ -121,9 +121,8 @@ const thoughtController = {
                 .then((response) => {
                     if(!response) {
                         return res.status(500).json({message: "No thought with this id"})
-                    } else {
-                        res.json(response)
                     }
+                    res.json(response)
                 })
         } catch (err) {
             res.status(500).json(err)
