@@ -1,6 +1,5 @@
 const router = require("express").Router();
-const {getThoughts,getSingleThought,createThought,updateThought,deleteThought,addReaction,removeReaction} = require("../../controllers/");
-//once controller is created put name here
+const {getThoughts,getSingleThought,createThought,updateThought,deleteThought,addReaction,removeReaction} = require("../../controllers/thoughtController");
 
 router.route("/")
     .get(getThoughts)
