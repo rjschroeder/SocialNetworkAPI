@@ -28,7 +28,21 @@ const thoughtController = {
     },
     createThought(req, res) {
         try {
-            
+            Thought.create(req.body)
+                .then((response) => {
+                    return User.findOneAndUpdate(
+                        {_id: req.body.userId},
+                        {$push: {thoughts: response._id}},
+                        {new: true}
+                    )
+                })
+                .then((response) => {
+                    if(!response) {
+                        return res.status(500).json({message: "No user with this id"})
+                    } else {
+                        res.json({message: "Success!"})
+                    }
+                })
         } catch (err) {
             res.status(500).json(err)
         }
