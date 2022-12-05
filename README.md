@@ -18,7 +18,9 @@ Install required packages with: npm i
 
 ## Usage
 
-Use this application as an api, routes are demonstrated in the walkthrough video below
+Use this application as an api, routes are demonstrated in the walkthrough video below.
+
+Run this application with npm start
 
 [Walkthrough Video](https://drive.google.com/file/d/1731PlnG3Et-ja0vA8Vs_rcy6TYnYHPWD/view)
 
