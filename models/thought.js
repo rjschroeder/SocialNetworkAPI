@@ -2,7 +2,7 @@ const {Schema,Types} = require('mongoose');
 const reactionSchema = require("./reaction");
 
 const thoughtSchema = new Schema({
-    thoughtContent: {
+    thoughtText: {
         type: String,
         required: true
     },
