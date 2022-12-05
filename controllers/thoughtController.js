@@ -14,7 +14,14 @@ const thoughtController = {
     },
     getSingleThought(req, res) {
         try {
-            
+            Thought.findOne({_id: req.params.thoughtId})
+                .then((response) => {
+                    if(response){
+                        res.json(response)
+                    } else {
+                        return res.status(500).json({message: "No thought"})
+                    }
+                })
         } catch (err) {
             res.status(500).json(err)
         }
